@@ -1,5 +1,4 @@
 import argparse
-import os
 import sys
 from loguru import logger
 from dotenv import load_dotenv, find_dotenv

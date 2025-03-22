@@ -1,7 +1,6 @@
 import yaml
 from loguru import logger
 from typing_extensions import Annotated
-from zenml import step, get_step_context
 
 
 def load_config_data(file_path: str) -> Annotated[dict, "config_data"]:

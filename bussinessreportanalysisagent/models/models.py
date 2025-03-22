@@ -1,37 +1,11 @@
-import sys
 from loguru import logger
 import os
 from langchain_google_genai.chat_models import ChatGoogleGenerativeAI
 from langchain_groq.chat_models import ChatGroq
 import logging
 
-# Remove default logger
-logger.remove()
-# Add custom configuration
-logger.add(
-    sys.stdout,
-    level="INFO",
-    filter=lambda record: not any(
-        term in record["message"] 
-        for term in [
-            "HTTP Request:", 
-            "HTTP Response:", 
-            "api.groq.com", 
-            "generativelanguage.googleapis.com",
-            "POST https://", 
-            "GET https://",
-            "200 OK"
-        ]
-    )
-)
-
-# Add at the top of your file after imports
-os.environ["LANGCHAIN_VERBOSE"] = "false"
-
-# Disable LangChain logging
-logging.getLogger("langchain").setLevel(logging.ERROR)
-logging.getLogger("langchain_google_genai").setLevel(logging.ERROR)
-logging.getLogger("langchain_groq").setLevel(logging.ERROR)
+# Only set external loggers to WARNING level to avoid too much output
+logging.getLogger("httpx").setLevel(logging.WARNING)
 
 class LLMModel:
     def __init__(self) -> None:
