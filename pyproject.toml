@@ -33,6 +33,14 @@ dependencies = [
     "zenml[server] (>=0.75.1)",
 ]
 
+[tool.poetry]
+name = "bussinessreportanalysisagent"
+description = "A business report analysis agent that uses OpenAI and Google Gemini APIs to analyze and generate reports."
+version = "0.0.1"
+packages = [
+    {include = "bussinessreportanalysisagent"},
+]
+
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
