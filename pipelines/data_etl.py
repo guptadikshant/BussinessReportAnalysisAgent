@@ -1,6 +1,8 @@
-from zenml import pipeline
 from loguru import logger
-from steps.etl import load_data_from_dir
+from zenml import pipeline
+
+from steps.etl import load_data_from_dir, parse_and_chunk_data
+from steps.utils import load_config_data
 
 
 @pipeline(enable_cache=False)
@@ -15,5 +17,9 @@ def data_etl_pipeline(
         config_file_path (str): Path to the configuration file.
     """
     logger.info("Starting data ETL pipeline")
-    load_data_from_dir(dir_path=dir_path, config_file_path=config_file_path)
+    # Load configuration data
+    config_data = load_config_data(config_file_path)
+
+    docs = load_data_from_dir(dir_path=dir_path, config_data=config_data)
+    parse_and_chunk_data(loaded_documents=docs, config_data=config_data)
     logger.info("Data ETL pipeline completed successfully")

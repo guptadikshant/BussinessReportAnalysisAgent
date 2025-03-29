@@ -10,7 +10,7 @@ from bussinessreportanalysisagent.validations.file_name_validation import Annual
 class PdfLoader:
 
     @staticmethod
-    def load_and_parse(pdfs_file_path, keywords_list: list[str], model_name: str, model_temperature: int) -> list[list[Document]]:
+    def load_and_parse(pdfs_file_path: str, keywords_list: list[str], model_name: str, model_temperature: int) -> list[list[Document]]:
 
         logger.info("Pdf parsing started....................")
         all_documents = []
@@ -20,8 +20,7 @@ class PdfLoader:
                 # Check if the file is a PDF
                 report = AnnualReportFile(filename=pdf_name)
                 loaded_docs = PyMuPDFLoader(file_path=os.path.join(pdfs_file_path, pdf_name)).load()
-                # logger.debug(f"Meta data keyword extraction started:{docs.company_name}")
-                newDoc = []
+                new_doc = []
                 i = 0
                 for doc in tqdm(loaded_docs, desc=f"Processing {pdf_name}", unit="page"):
                     all_keyword = ContentKeyword.get_content_keyword(
@@ -34,13 +33,13 @@ class PdfLoader:
                     meta_data = doc.metadata
                     if len(all_keyword):
                         i += 1
-                        for newKeyword in all_keyword:
-                            meta_data[newKeyword] = newKeyword
+                        for new_keyword in all_keyword:
+                            meta_data[new_keyword] = new_keyword
 
                     meta_data['Company_Name'], meta_data['Document_Type'], meta_data[
                         'Year'] = report.company_name, report.document_type, report.year
-                    newDoc.append(Document(page_content=doc.page_content, meta_data=meta_data))
-                all_documents.append(newDoc)
+                    new_doc.append(Document(page_content=doc.page_content, meta_data=meta_data))
+                all_documents.append(new_doc)
 
             return all_documents
         

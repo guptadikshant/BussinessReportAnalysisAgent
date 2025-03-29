@@ -3,12 +3,10 @@ configurations:
   vector_database_config:
     collection_name: "business_report_analysis"
   embedding_model_config:
-    gemini_embedding_model:
-      model_id: "models/text-embedding-004"
-      dimension: 768
-    sentence_transformer_embedding_model:
-      model_id: "sentence-transformers/all-MiniLM-L6-v2"
-      dimension: 384
+    model_id: "sentence-transformers/all-MiniLM-L6-v2"
+    max_seq_length: 256
+    chunk_size: 1000
+    chunk_overlap: 0
   llm_model_config:
     groq_model:
       model_id: "qwen-2.5-32b"

@@ -31,6 +31,7 @@ dependencies = [
     "loguru (>=0.7.3,<0.8.0)",
     "fastapi (>=0.100,<=0.115.8)",
     "zenml[server] (>=0.75.1)",
+    "unstructured[all-docs] (>=0.17.2,<0.18.0)",
 ]
 
 [tool.poetry]

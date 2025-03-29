@@ -20,13 +20,13 @@ def main():
     # Set up argument parser
     parser = argparse.ArgumentParser(description="Run ETL pipeline")
     parser.add_argument(
-        "--dir_path",
+        "--dir-path",
         type=str,
         help="Path to the directory containing the pdf files",
         required=True,
     )
     parser.add_argument(
-        "--config_file_path",
+        "--config-file-path",
         type=str,
         default=".\steps\config.yml",
         help="Path to the configuration file",
